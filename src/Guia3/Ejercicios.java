@@ -30,7 +30,8 @@ public class Ejercicios {
         //ex1();
         //ex2();
         //ex3();
-        ex4();
+        //ex4();
+        ex6();
     }
     
     public static void guia(){
@@ -444,13 +445,32 @@ public class Ejercicios {
     Leer la altura de N personas y determinar el promedio de estaturas que se encuentran por debajo de 1.60 mts. 
     y el promedio de estaturas en general.
     */
-    public static void ex6(String[] args) {
+    public static void ex6() {
         Scanner leer = new Scanner(System.in);
         
         System.out.println("Ingrese la cantidad de personas: ");
         int cant = leer.nextInt();
         
+        float personas[];
         
+        personas = new float[cant];
+        
+        float sum_tot = 0;
+        float sum_deb = 0;
+        int cant_deb = 0;
+        for (int i = 0; i < personas.length; i++) {
+            personas[i] = (float) (Math.random()) + 1;
+            System.out.println("Persona " + i + ": " + personas[i]);
+            sum_tot += personas[i];
+            
+            if (personas[i] < 1.60) {
+                sum_deb += personas[i];
+                cant_deb += 1;
+            }
+        }
+        
+        System.out.println("Promedio de personas debajo de 1.60 mts: " + sum_deb/cant_deb);
+        System.out.println("Promedio de personas general: " + sum_tot/cant);
         
     }
 }
