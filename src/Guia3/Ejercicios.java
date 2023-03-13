@@ -31,7 +31,13 @@ public class Ejercicios {
         //ex2();
         //ex3();
         //ex4();
-        ex6();
+        //ex6();
+        //ex9();
+        //ex11();
+        //ex12();
+        //ex13();
+        //ex12();
+        ex14();
     }
     
     public static void guia(){
@@ -472,5 +478,155 @@ public class Ejercicios {
         System.out.println("Promedio de personas debajo de 1.60 mts: " + sum_deb/cant_deb);
         System.out.println("Promedio de personas general: " + sum_tot/cant);
         
+    }
+    
+    /*
+    Simular la división usando solamente restas. Dados dos números enteros mayores que uno, realizar un algoritmo 
+    que calcule el cociente y el residuo usando sólo restas. Método: Restar el dividendo del divisor hasta obtener 
+    un resultado menor que el divisor, este resultado es el residuo, y el número de restas realizadas es el cociente.
+Por ejemplo: 50 / 13:
+50 – 13 = 37     una resta realizada
+37 – 13 = 24     dos restas realizadas
+24 – 13 = 11     tres restas realizadas
+dado que 11 es menor que 13, entonces: el residuo es 11 y el cociente es 3.
+¿Aún no lo entendiste? Recomendamos googlear división con restas sucesivas.
+    */
+    
+    public static void ex9() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese 2 numero enteros mayores a 1: ");
+        int num1 = leer.nextInt();
+        int num2 = leer.nextInt();
+        
+        while (num1 < 1 || num2 < 1) {
+            System.out.println("Error. Ingrese 2 numero enteros mayores a 1: ");
+            num1 = leer.nextInt();
+            num2 = leer.nextInt();
+        }
+        int residuo = num1;
+        int cociente = 0;
+        while (residuo >= num2) {
+            residuo -= num2;
+            cociente++;
+        }
+        
+        if (cociente == 0) {
+            cociente++;
+        }
+        
+        System.out.println("El cociente es: " + cociente);
+        System.out.println("El residuo es: " + residuo);
+        System.out.println(cociente + "(" + residuo + "/" + num2 + ")");
+    }
+    
+    /*
+    Escribir un programa que lea un número entero y devuelva el número de dígitos que componen ese número. 
+    Por ejemplo, si introducimos el número 12345, el programa deberá devolver 5. Calcular la cantidad de 
+    dígitos matemáticamente utilizando el operador de división. Nota: recordar que las variables de tipo 
+    entero truncan los números o resultados.
+    */
+    public static void ex11() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese un numero entero: ");
+        int num = leer.nextInt();
+        
+        int cont = 1;
+        while (num / 10 != 0) {  
+            System.out.println(num % 10);
+            num /= 10;
+            cont++;
+        }
+        
+        System.out.println("El numero de digitos que componen ese numero es: " + cont);
+    }
+    
+    /*
+    Necesitamos mostrar un contador con 3 dígitos (X-X-X), que muestre los números del 0-0-0 al 9-9-9, 
+    con la particularidad que cada vez que aparezca un 3 lo sustituya por una E. Ejemplo:
+0-0-0
+0-0-1
+0-0-2
+0-0-E
+0-0-4
+0-1-2
+0-1-E
+Nota: investigar función equals() y como convertir números a String.
+
+    */
+    public static void ex12() {
+        int x = 0;
+        int y = 0;
+        int z = 0;
+        String text;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                for (int k = 0; k < 10; k++) {
+                    text = i + " - " + j + " - " + k;
+                    text = text.replaceAll("3", "E");
+                    System.out.println(text);
+                }
+            }
+        }
+    }
+    
+    /*
+    Crear un programa que dibuje una escalera de números, donde cada línea de números comience en uno y 
+    termine en el número de la línea. Solicitar la altura de la escalera al usuario al comenzar. 
+    Ejemplo: si se ingresa el número 3:
+1
+12
+123
+    */
+    public static void ex13() {
+        Scanner leer = new Scanner(System.in);
+        
+        System.out.println("Ingrese un numero: ");
+        int num = leer.nextInt();
+        int cont;
+        for (int i = 1; i <= num; i++) {
+            cont = 1;
+            while (cont <= i) {                
+                System.out.print(cont);
+                cont++;
+            }
+            System.out.println("");
+        }
+    }
+    
+    /*
+    Se dispone de un conjunto de N familias, cada una de las cuales tiene una M cantidad de hijos. 
+    Escriba un programa que pida la cantidad de familias y para cada familia la cantidad de hijos 
+    para averiguar la media de edad de los hijos de todas las familias.
+    */
+    public static void ex14() {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("Ingrese la cantidad de familias: ");
+        int num_familias = leer.nextInt();
+        System.out.println("**********************************");
+        int[][] familia;
+        familia = new int[num_familias][];
+        int num_hijos;
+        
+        for (int i = 0; i < num_familias; i++) {
+            System.out.println("Cuantos Hijos tienen la familia " + (i+1) + ": ");
+            num_hijos = leer.nextInt();
+            familia[i] = new int[num_hijos];
+            for (int j = 0; j < num_hijos; j++) {
+                familia[i][j] = (int) (Math.random() * 90);
+                System.out.println("Edad hijo " + (j+1) + ": " + familia[i][j]);
+            }
+            System.out.println("");
+        }
+        int[] promedio_edad;
+        promedio_edad = new int[familia.length];
+        int prom;
+        for (int i = 0; i < familia.length; i++) {
+            prom = 0;
+            for (int j = 0; j < familia[i].length; j++) {
+                //System.out.println(familia[i][j]);
+                prom += familia[i][j];
+            }
+            System.out.println("Promedio de edad de la familia " + (i+1) + ": " + prom/familia[i].length);
+        }
     }
 }
