@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author itsmi
  */
 public class Ejercicios {
-    
+
     public static void main(String[] args) {
         //ej1();
         //ej2();
